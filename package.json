@@ -1,0 +1,19 @@
+{
+  "name": "sarynpaintjs",
+  "version": "0.0.0",
+  "description": "sarynpaint for the web more",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trebor/sarynpaintjs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trebor/sarynpaintjs/issues"
+  },
+  "homepage": "https://github.com/trebor/sarynpaintjs"
+}

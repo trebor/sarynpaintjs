@@ -1,0 +1,22 @@
+html {
+  color: #444;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background: white;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+#paintarea {
+  background-color: white;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
