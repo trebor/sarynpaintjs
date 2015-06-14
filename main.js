@@ -112,9 +112,16 @@ define(['jquery', 'lodash'], function ($, _) {
   setColor(ctx, currentColor, ALPHA);
 
   ctx.canvas.addEventListener('mousemove', handleMouseEvent);
-  ctx.canvas.addEventListener('touchmove', handleMouseEvent);
+  ctx.canvas.addEventListener('touchmove', handleTouchEvent);
+
+  function handleTouchEvent(evt) {
+    playTool(COLORS[0]);
+    return handleTouchEvent(evt);
+  }
 
   function handleMouseEvent(evt) {
+    evt.preventDefault();
+
     var pos = getMousePos(ctx.canvas, evt);
     if (!isTool(ctx, pos)) {
       setPostion(ctx, scale, pos.x, pos.y);
