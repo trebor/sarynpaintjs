@@ -27,7 +27,6 @@
   "dependencies": {
     "jquery": "~2.1.4",
     "requirejs": "~2.1.18",
-    "lodash": "~3.9.3",
-    "jqueryui-touch-punch": "*"
+    "lodash": "~3.9.3"
   }
 }
