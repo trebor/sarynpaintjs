@@ -38,7 +38,7 @@ define(['jquery', 'lodash'], function ($, _) {
   var currentShape = SHAPES[3];
   var currentColor = COLORS[3];
   var backgroundColor = COLORS[2];
-  var altBackgroundColor = COLORS[9];
+  var altBackgroundColor = COLORS[1];
   var toolWidth = null;
   var colorHeight = null;
   var shapeHeight = null;
