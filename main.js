@@ -33,18 +33,49 @@ define(['jquery', 'lodash'], function ($, _) {
   ];
 
   var scale = 80;
-  var currentPath = SHAPES[3];
-  var currentColor = COLORS[4];
+  var currentShape = SHAPES[3];
+  var currentColor = COLORS[3];
+  var backgroundColor = COLORS[2];
+  var altBackgroundColor = COLORS[9];
+  var toolWidth = null;
+  var colorHeight = null;
+  var shapeHeight = null;
 
   var ctx = configureCanvasContext('#paintarea');
   setColor(ctx, currentColor, ALPHA);
 
   ctx.canvas.addEventListener('mousemove', function(evt) {
     var pos = getMousePos(ctx.canvas, evt);
-    setPostion(ctx, scale, pos.x, pos.y);
-    ctx.fill(currentPath);
+    if (!isTool(ctx, pos)) {
+      setPostion(ctx, scale, pos.x, pos.y);
+      ctx.fill(currentShape);
+    }
   }, false);
 
+  function isTool(ctx, pos) {
+    var width = ctx.canvas.width;
+    var height = ctx.canvas.height;
+
+    if (pos.x < toolWidth) {
+      var newColor = COLORS[Math.floor(pos.y / colorHeight)];
+      if (newColor != currentColor) {
+        setColor(ctx, currentColor = newColor, ALPHA);
+        render(ctx);
+      }
+      return true;
+    }
+
+    if (pos.x > width - toolWidth) {
+      var newShape = SHAPES[Math.floor(pos.y / shapeHeight)];
+      if (newShape != currentShape) {
+        currentShape = newShape;
+        render(ctx);
+      }
+      return true;
+    }
+
+    return false;
+  }
 
   function setPostion(ctx, scale, x, y) {
     ctx.resetTransform();
@@ -66,11 +97,22 @@ define(['jquery', 'lodash'], function ($, _) {
   }
 
   function render(ctx) {
-    var toolWidth = ctx.canvas.height / COLORS.length;
+
+    ctx.restore();
+    ctx.save();
+
+    // establish width and height
+
+    var width = ctx.canvas.width;
+    var height = ctx.canvas.height;
+
+    // decide how wide the tools should be
+
+    toolWidth = height / COLORS.length;
 
     // render colors
 
-    var colorStep = toolWidth;
+    colorHeight = toolWidth;
     COLORS.forEach(function(color, i) {
       setColor(ctx, color, 1);
       ctx.fillRect(0, i * toolWidth, toolWidth, toolWidth);
@@ -78,18 +120,21 @@ define(['jquery', 'lodash'], function ($, _) {
 
     // render shapes
 
-    var shapeStep = ctx.canvas.height / SHAPES.length;
-    var shapeX = ctx.canvas.width - toolWidth / 2;
-    setColor(ctx, currentColor, 1);
+    setColor(ctx, currentColor == backgroundColor ? altBackgroundColor : backgroundColor, 1);
+    ctx.fillRect(width - toolWidth, 0, toolWidth, height);
+
+    shapeHeight = height / SHAPES.length;
+    var shapeX = width - toolWidth / 2;
     SHAPES.forEach(function(shape, i) {
-      setPostion(ctx, toolWidth * .75, shapeX, (i + 0.5) * shapeStep);
+      setColor(ctx, currentColor, shape == currentShape ? 1 : 0.3);
+      setPostion(ctx, toolWidth * .75, shapeX, (i + 0.5) * shapeHeight);
       ctx.fill(shape);
     });
 
     // set clip
 
     ctx.resetTransform();
-    ctx.rect(toolWidth,0, ctx.canvas.width - toolWidth * 2, ctx.canvas.height);
+    ctx.rect(toolWidth,0, width - toolWidth * 2, height);
     ctx.clip();
     setColor(ctx, currentColor, ALPHA);
   }
@@ -97,6 +142,7 @@ define(['jquery', 'lodash'], function ($, _) {
   function configureCanvasContext(elementSelector, type, options) {
     var canvas = $(elementSelector).get(0);
     var ctx = canvas.getContext(type || '2d', options);
+    ctx.save();
     var sizeCanvas = function() {
       canvas.width = canvas.clientWidth;
       canvas.height = canvas.clientHeight;
