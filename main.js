@@ -111,18 +111,20 @@ define(['jquery', 'lodash'], function ($, _) {
   var ctx = configureCanvasContext('#paintarea');
   setColor(ctx, currentColor, ALPHA);
 
-  ctx.canvas.addEventListener('mousemove', handleMouseEvent);
-  ctx.canvas.addEventListener('touchmove', handleTouchEvent);
+  ctx.canvas.addEventListener('mousemove', handleMouseMove);
+  ctx.canvas.addEventListener('touchmove', handleTouchMove);
 
-  function handleTouchEvent(evt) {
-    // playTool(COLORS[0]);
-    return handleTouchEvent(evt);
+  function handleTouchMove(evt) {
+    evt.preventDefault();
+    paint(ctx, getMousePos(ctx.canvas, evt.changedTouches[0]));
   }
 
-  function handleMouseEvent(evt) {
+  function handleMouseMove(evt) {
     evt.preventDefault();
+    paint(ctx, getMousePos(ctx.canvas, evt));
+  }
 
-    var pos = getMousePos(ctx.canvas, evt);
+  function paint(ctx, pos) {
     if (!isTool(ctx, pos)) {
       setPostion(ctx, scale, pos.x, pos.y);
       ctx.fill(currentShape.path);
