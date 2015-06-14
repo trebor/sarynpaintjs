@@ -111,13 +111,16 @@ define(['jquery', 'lodash', 'touchPunch'], function ($, _, tp) {
   var ctx = configureCanvasContext('#paintarea');
   setColor(ctx, currentColor, ALPHA);
 
-  ctx.canvas.addEventListener('mousemove', function(evt) {
+  ctx.canvas.addEventListener('mousemove', handleMouseEvent);
+  ctx.canvas.addEventListener('drag', handleMouseEvent);
+
+  function handleMouseEvent(evt) {
     var pos = getMousePos(ctx.canvas, evt);
     if (!isTool(ctx, pos)) {
       setPostion(ctx, scale, pos.x, pos.y);
       ctx.fill(currentShape.path);
     }
-  }, false);
+  }
 
   function isTool(ctx, pos) {
     var width = ctx.canvas.width;
