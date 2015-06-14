@@ -58,7 +58,6 @@ define(['jquery', 'lodash'], function ($, _) {
     var rgba = color.slice(0);
     rgba.push(alpah);
     ctx.fillStyle = 'rgba(' + rgba + ')';
-    console.log("ctx.fillStyle", ctx.fillStyle);
   }
 
   function setPath(path) {
