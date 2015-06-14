@@ -115,7 +115,7 @@ define(['jquery', 'lodash'], function ($, _) {
   ctx.canvas.addEventListener('touchmove', handleTouchEvent);
 
   function handleTouchEvent(evt) {
-    playTool(COLORS[0]);
+    // playTool(COLORS[0]);
     return handleTouchEvent(evt);
   }
 
