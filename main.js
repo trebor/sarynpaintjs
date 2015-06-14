@@ -11,25 +11,27 @@ define(['jquery', 'lodash'], function ($, _) {
 
   var RADIUS = 0.5;
   var ALPHA = 0.3;
+  var AUDIO_BASE_URL = 'resources/sounds/';
+  var AUDIO_EXT = '.wav';
 
   var SHAPES = [
-    new Path2D(regularPolygonePath(3, RADIUS)),
-    new Path2D(regularPolygonePath(4, RADIUS, 45)),
-    new Path2D(regularPolygonePath(5, RADIUS)),
-    new Path2D(regularPolygonePath(6, RADIUS)),
+    {name: 'triangle', path: new Path2D(regularPolygonePath(3, RADIUS))},
+    {name: 'square',   path: new Path2D(regularPolygonePath(4, RADIUS, 45))},
+    {name: 'pentagon', path: new Path2D(regularPolygonePath(5, RADIUS))},
+    {name: 'hexagon',  path: new Path2D(regularPolygonePath(6, RADIUS))},
   ];
 
   var COLORS = [
-    [0x00, 0x00, 0x00], // black
-    [0x80, 0x80, 0x80], // gray
-    [0xff, 0xff, 0xff], // white
-    [0xff, 0x00, 0x00], // red
-    [0xff, 0x97, 0x00], // orange
-    [0xff, 0xff, 0x00], // yellow
-    [0x00, 0xff, 0x00], // green
-    [0x00, 0x00, 0xff], // blue
-    [0x75, 0x09, 0x91], // purple
-    [0xff, 0x40, 0xC4], // pink
+    {name: 'black',  rgb: [0x00, 0x00, 0x00]},
+    {name: 'gray',   rgb: [0x80, 0x80, 0x80]},
+    {name: 'white',  rgb: [0xff, 0xff, 0xff]},
+    {name: 'red',    rgb: [0xff, 0x00, 0x00]},
+    {name: 'orange', rgb: [0xff, 0x97, 0x00]},
+    {name: 'yellow', rgb: [0xff, 0xff, 0x00]},
+    {name: 'green',  rgb: [0x00, 0xff, 0x00]},
+    {name: 'blue',   rgb: [0x00, 0x00, 0xff]},
+    {name: 'purple', rgb: [0x75, 0x09, 0x91]},
+    {name: 'pink',   rgb: [0xff, 0x40, 0xC4]},
   ];
 
   var scale = 80;
@@ -41,6 +43,65 @@ define(['jquery', 'lodash'], function ($, _) {
   var colorHeight = null;
   var shapeHeight = null;
 
+  var aCtx = new AudioContext();
+
+  loadSounds(aCtx);
+
+  function loadSounds(aCtx) {
+    if (!aCtx) {
+      console.warn("Audio Not Supported.");
+      return;
+    }
+
+    loadSound(aCtx, AUDIO_BASE_URL + 'welcome' + AUDIO_EXT, {name: 'wecome'}, function(d) {
+      playSound(aCtx, d.audio);
+    });
+
+    SHAPES.forEach(function(shape) {
+      loadSound(aCtx, AUDIO_BASE_URL + shape.name + AUDIO_EXT, shape);
+    });
+
+    COLORS.forEach(function(color) {
+      loadSound(aCtx, AUDIO_BASE_URL + color.name + AUDIO_EXT, color);
+    });
+
+  }
+
+  function loadSound(aCtx, url, destination, callback) {
+    var request = new XMLHttpRequest();
+    request.open('GET', url, true);
+    request.responseType = 'arraybuffer';
+    destination.audio = null;
+
+    // Decode asynchronously
+
+    request.onload = function() {
+      aCtx.decodeAudioData(request.response, function(buffer) {
+        destination.audio = buffer;
+        if (callback) {
+          callback(destination);
+        }
+      }, function(error) {
+        console.error("error loading: ", url);
+      });
+    };
+
+    request.send();
+  }
+
+  function playTool(tool) {
+    if (aCtx && tool.audio) {
+      playSound(aCtx, tool.audio);
+    }
+  }
+
+  function playSound(aCtx, buffer) {
+    var source = aCtx.createBufferSource();
+    source.buffer = buffer;
+    source.connect(aCtx.destination);
+    source.start(0);
+  }
+
   var ctx = configureCanvasContext('#paintarea');
   setColor(ctx, currentColor, ALPHA);
 
@@ -48,7 +109,7 @@ define(['jquery', 'lodash'], function ($, _) {
     var pos = getMousePos(ctx.canvas, evt);
     if (!isTool(ctx, pos)) {
       setPostion(ctx, scale, pos.x, pos.y);
-      ctx.fill(currentShape);
+      ctx.fill(currentShape.path);
     }
   }, false);
 
@@ -60,6 +121,7 @@ define(['jquery', 'lodash'], function ($, _) {
       var newColor = COLORS[Math.floor(pos.y / colorHeight)];
       if (newColor != currentColor) {
         setColor(ctx, currentColor = newColor, ALPHA);
+        playTool(currentColor);
         render(ctx);
       }
       return true;
@@ -69,6 +131,7 @@ define(['jquery', 'lodash'], function ($, _) {
       var newShape = SHAPES[Math.floor(pos.y / shapeHeight)];
       if (newShape != currentShape) {
         currentShape = newShape;
+        playTool(currentShape);
         render(ctx);
       }
       return true;
@@ -91,7 +154,7 @@ define(['jquery', 'lodash'], function ($, _) {
   }
 
   function setColor(ctx, color, alpha) {
-    var rgba = color.slice(0);
+    var rgba = color.rgb.slice(0);
     rgba.push(alpha);
     ctx.fillStyle = 'rgba(' + rgba + ')';
   }
@@ -128,7 +191,7 @@ define(['jquery', 'lodash'], function ($, _) {
     SHAPES.forEach(function(shape, i) {
       setColor(ctx, currentColor, shape == currentShape ? 1 : 0.3);
       setPostion(ctx, toolWidth * .75, shapeX, (i + 0.5) * shapeHeight);
-      ctx.fill(shape);
+      ctx.fill(shape.path);
     });
 
     // set clip
