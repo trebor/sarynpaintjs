@@ -211,7 +211,6 @@ define(['jquery', 'lodash', 'touchPunch'], function ($, _, tp) {
   function configureCanvasContext(elementSelector, type, options) {
     var $canvas = $(elementSelector);
     var canvas = $canvas.get(0);
-    $canvas.draggable();
     var ctx = canvas.getContext(type || '2d', options);
     ctx.save();
     var sizeCanvas = function() {
