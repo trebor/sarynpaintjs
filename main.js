@@ -9,10 +9,10 @@ requirejs.config({
 
 define(['jquery', 'lodash'], function ($, _) {
 
-  var RADIUS = 50;
+  var RADIUS = 0.5;
   var ALPHA = 0.3;
 
-  var PATHS = [
+  var SHAPES = [
     new Path2D(regularPolygonePath(3, RADIUS)),
     new Path2D(regularPolygonePath(4, RADIUS, 45)),
     new Path2D(regularPolygonePath(5, RADIUS)),
@@ -32,19 +32,24 @@ define(['jquery', 'lodash'], function ($, _) {
     [0xff, 0x40, 0xC4], // pink
   ];
 
-  var scale = 1;
-  var currentPath = null;
+  var scale = 80;
+  var currentPath = SHAPES[3];
+  var currentColor = COLORS[4];
 
   var ctx = configureCanvasContext('#paintarea');
-  setColor(ctx, COLORS[4], ALPHA);
-  setPath(PATHS[3]);
+  setColor(ctx, currentColor, ALPHA);
 
   ctx.canvas.addEventListener('mousemove', function(evt) {
     var pos = getMousePos(ctx.canvas, evt);
-    ctx.resetTransform();
-    ctx.transform(scale, 0, 0, scale, pos.x, pos.y);
+    setPostion(ctx, scale, pos.x, pos.y);
     ctx.fill(currentPath);
   }, false);
+
+
+  function setPostion(ctx, scale, x, y) {
+    ctx.resetTransform();
+    ctx.transform(scale, 0, 0, scale, x, y);
+  }
 
   function getMousePos(canvas, evt) {
     var rect = ctx.canvas.getBoundingClientRect();
@@ -54,14 +59,39 @@ define(['jquery', 'lodash'], function ($, _) {
     };
   }
 
-  function setColor(ctx, color, alpah) {
+  function setColor(ctx, color, alpha) {
     var rgba = color.slice(0);
-    rgba.push(alpah);
+    rgba.push(alpha);
     ctx.fillStyle = 'rgba(' + rgba + ')';
   }
 
-  function setPath(path) {
-    currentPath = path;
+  function render(ctx) {
+    var toolWidth = ctx.canvas.height / COLORS.length;
+
+    // render colors
+
+    var colorStep = toolWidth;
+    COLORS.forEach(function(color, i) {
+      setColor(ctx, color, 1);
+      ctx.fillRect(0, i * toolWidth, toolWidth, toolWidth);
+    });
+
+    // render shapes
+
+    var shapeStep = ctx.canvas.height / SHAPES.length;
+    var shapeX = ctx.canvas.width - toolWidth / 2;
+    setColor(ctx, currentColor, 1);
+    SHAPES.forEach(function(shape, i) {
+      setPostion(ctx, toolWidth * .75, shapeX, (i + 0.5) * shapeStep);
+      ctx.fill(shape);
+    });
+
+    // set clip
+
+    ctx.resetTransform();
+    ctx.rect(toolWidth,0, ctx.canvas.width - toolWidth * 2, ctx.canvas.height);
+    ctx.clip();
+    setColor(ctx, currentColor, ALPHA);
   }
 
   function configureCanvasContext(elementSelector, type, options) {
@@ -70,6 +100,7 @@ define(['jquery', 'lodash'], function ($, _) {
     var sizeCanvas = function() {
       canvas.width = canvas.clientWidth;
       canvas.height = canvas.clientHeight;
+      render(ctx);
     };
 
     $(window).resize(_.debounce(sizeCanvas, 25));
