@@ -112,7 +112,7 @@ define(['jquery', 'lodash'], function ($, _) {
   setColor(ctx, currentColor, ALPHA);
 
   ctx.canvas.addEventListener('mousemove', handleMouseEvent);
-  ctx.canvas.addEventListener('drag', handleMouseEvent);
+  ctx.canvas.addEventListener('touchmove', handleMouseEvent);
 
   function handleMouseEvent(evt) {
     var pos = getMousePos(ctx.canvas, evt);
