@@ -13,7 +13,7 @@ requirejs.config({
 });
 
 
-define(['jquery', 'lodash', 'touchPunch'], function ($, _, tp) {
+define(['jquery', 'lodash'], function ($, _) {
 
   var RADIUS = 0.5;
   var ALPHA = 0.3;
