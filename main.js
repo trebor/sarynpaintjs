@@ -1,13 +1,19 @@
 requirejs.config({
   baseUrl: 'bower_components',
   paths: {
-    lodash: 'lodash/lodash.min',
-    jquery: 'jquery/dist/jquery.min'
+    lodash:     'lodash/lodash.min',
+    jquery:     'jquery/dist/jquery.min',
+    jqueryUi:   'jquery-ui/jquery-ui.min',
+    touchPunch: 'jqueryui-touch-punch/jquery.ui.touch-punch.min'
+  },
+  shim: {
+    touchPunch: {deps: ['jqueryUi']},
+    jqueryUi:   {deps: ['jquery']}
   }
 });
 
 
-define(['jquery', 'lodash'], function ($, _) {
+define(['jquery', 'lodash', 'touchPunch'], function ($, _, tp) {
 
   var RADIUS = 0.5;
   var ALPHA = 0.3;
@@ -203,7 +209,9 @@ define(['jquery', 'lodash'], function ($, _) {
   }
 
   function configureCanvasContext(elementSelector, type, options) {
-    var canvas = $(elementSelector).get(0);
+    var $canvas = $(elementSelector);
+    var canvas = $canvas.get(0);
+    $canvas.draggable();
     var ctx = canvas.getContext(type || '2d', options);
     ctx.save();
     var sizeCanvas = function() {
