@@ -1,8 +1,5 @@
-# <a href="http://trebor.github.io/sarynpaintjs" style="width:25%;">
-  <img src="resources/graphics/SarynPaintIcon.png">
-</a>
+# <img src="resources/graphics/SarynPaintIcon.png" width="40px">  [SarynPaintJS](http://trebor.github.io/sarynpaintjs/)
 
-[SarynPaintJS](http://trebor.github.io/sarynpaintjs/)
 
 <p align="center">
   <a href="http://trebor.github.io/sarynpaintjs" style="width:100%;">
