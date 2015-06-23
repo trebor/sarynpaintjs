@@ -54,8 +54,8 @@ define(['jquery', 'lodash'], function ($, _) {
   ];
 
   var scale = 80;
-  var currentShape = SHAPES[3];
-  var currentColor = COLORS[3];
+  var currentShape = SHAPES[SHAPES.length - 3];
+  var currentColor = COLORS[COLORS.length - 1];
   var backgroundColor = COLORS[2];
   var altBackgroundColor = COLORS[1];
   var toolWidth = null;
@@ -139,9 +139,19 @@ define(['jquery', 'lodash'], function ($, _) {
 
   function paint(ctx, pos) {
     if (!isTool(ctx, pos)) {
+      setColor(ctx, currentColor, computeAlpha(ctx, pos));
       setPostion(ctx, scale, pos.x, pos.y);
       ctx.fill(currentShape.path);
     }
+  }
+
+  function computeAlpha(ctx, pos) {
+    var width = ctx.canvas.width;
+    var height = ctx.canvas.height;
+    var ex = pos.x < width  / 2 ? pos.x - toolWidth : (width - toolWidth) - pos.x;
+    var ey = pos.y < height / 2 ? pos.y             : (height           ) - pos.y;
+    var edgeDistance = Math.max(Math.min(Math.min(ex, ey), scale)  - scale / 2, 0);
+    return edgeDistance / (scale / 2) * ALPHA;
   }
 
   function isTool(ctx, pos) {
@@ -151,7 +161,7 @@ define(['jquery', 'lodash'], function ($, _) {
     if (pos.x < toolWidth) {
       var newColor = COLORS[Math.floor(pos.y / colorHeight)];
       if (newColor != currentColor) {
-        setColor(ctx, currentColor = newColor, ALPHA);
+        currentColor = newColor;
         playTool(currentColor);
         render(ctx);
       }
