@@ -57,13 +57,15 @@ define(['jquery', 'lodash', 'fixedShapes'], function ($, _, FixedShapes) {
   var toolWidth = null;
   var colorHeight = null;
   var shapeHeight = null;
+  var playNthPaint = 1;
 
   var aCtx = new AudioContext();
 
   loadSounds(aCtx);
   $('#fullscreen').on('click', function() {
-    $('#splash').removeClass('show');
     requestFullScreen($('#paintarea'));
+    $('#splash').removeClass('show');
+    playNthPaint = 2;
   });
 
   setTimeout(start, 30 * 1000);
@@ -73,6 +75,12 @@ define(['jquery', 'lodash', 'fixedShapes'], function ($, _, FixedShapes) {
   function start() {
     $('#splash').fadeOut(500, function() {
       $('#splash').removeClass('show');
+    });
+  }
+
+  function playStartTools() {
+    playTool(currentColor, function() {
+      playTool(currentShape);
     });
   }
 
@@ -90,17 +98,18 @@ define(['jquery', 'lodash', 'fixedShapes'], function ($, _, FixedShapes) {
   }
   window.requestFullScreen = requestFullScreen;
 
-  function playTool(tool) {
+  function playTool(tool, done) {
     if (aCtx && tool.audio) {
-      playSound(aCtx, tool.audio);
+      playSound(aCtx, tool.audio, done);
     }
   }
 
-  function playSound(aCtx, buffer) {
+  function playSound(aCtx, buffer, done) {
     var source = aCtx.createBufferSource();
     source.buffer = buffer;
     source.connect(aCtx.destination);
     source.start(0);
+    source.onended = done;
   }
 
   var ctx = configureCanvasContext('#paintarea');
@@ -120,6 +129,10 @@ define(['jquery', 'lodash', 'fixedShapes'], function ($, _, FixedShapes) {
   }
 
   function paint(ctx, pos) {
+    if (--playNthPaint == 0) {
+      playStartTools();
+    }
+
     if (!isTool(ctx, pos)) {
       setColor(ctx, currentColor, computeAlpha(ctx, pos));
       setPostion(ctx, scale, pos.x, pos.y);

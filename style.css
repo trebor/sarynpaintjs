@@ -23,3 +23,11 @@ body {
 .modal-header, .modal-footer {
   border: 0px;
 }
+
+p {
+  font-size: 24px;
+}
+
+h1 {
+  font-size: 50px;
+}
