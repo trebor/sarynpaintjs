@@ -49,7 +49,7 @@ define(['jquery', 'lodash', 'fixedShapes'], function ($, _, FixedShapes) {
     {name: 'pink',   rgb: [0xff, 0x40, 0xC4]},
   ];
 
-  var scale = 80;
+  var scale = 50;
   var currentShape = SHAPES[SHAPES.length - 3];
   var currentColor = COLORS[COLORS.length - 1];
   var backgroundColor = COLORS[2];
