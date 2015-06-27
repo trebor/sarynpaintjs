@@ -22,7 +22,6 @@ define(['jquery', 'lodash', 'fixedShapes'], function ($, _, FixedShapes) {
   var AUDIO_BASE_URL = 'resources/sounds/';
   var AUDIO_EXT = '.wav';
 
-
   var SHAPES = [
     {name: 'triangle', path: new Path2D(regularPolygonePath(3, RADIUS))},
     {name: 'square',   path: new Path2D(regularPolygonePath(4, RADIUS, 45))},
@@ -58,6 +57,7 @@ define(['jquery', 'lodash', 'fixedShapes'], function ($, _, FixedShapes) {
   var colorHeight = null;
   var shapeHeight = null;
   var playNthPaint = 1;
+  var goodbyeSound = {name: 'goodbye'};
 
   var aCtx = new AudioContext();
 
@@ -76,6 +76,14 @@ define(['jquery', 'lodash', 'fixedShapes'], function ($, _, FixedShapes) {
     $('#splash').fadeOut(500, function() {
       $('#splash').removeClass('show');
     });
+  }
+
+  window.onbeforeunload = confirmExit;
+  function confirmExit()
+  {
+    setTimeout(function() {
+      playSound(aCtx, goodbyeSound.audio);
+    }, 0);
   }
 
   function playStartTools() {
@@ -297,6 +305,8 @@ define(['jquery', 'lodash', 'fixedShapes'], function ($, _, FixedShapes) {
     loadSound(aCtx, AUDIO_BASE_URL + 'welcome' + AUDIO_EXT, {name: 'wecome'}, function(d) {
       playSound(aCtx, d.audio);
     });
+
+    loadSound(aCtx, AUDIO_BASE_URL + 'goodbye' + AUDIO_EXT, goodbyeSound);
 
     SHAPES.forEach(function(shape) {
       loadSound(aCtx, AUDIO_BASE_URL + shape.name + AUDIO_EXT, shape);
