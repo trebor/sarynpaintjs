@@ -25,11 +25,11 @@ body {
 }
 
 p {
-  font-size: 24px;
+  font-size: 27px;
 }
 
 h1 {
-  font-size: 50px;
+  font-size: 70px;
 }
 
 .btn-lg,
@@ -39,3 +39,8 @@ h1 {
   line-height: 1.3333333;
   border-radius: 6px;
 }
+
+#splash {
+  margin-top: 5%;
+}
+
