@@ -3,13 +3,34 @@
   <head>
     <title>Saryn Paint</title>
     <link rel="icon" type="image/png" href="resources/graphics/SarynPaintIcon.png">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="bower_components/bootstrap-theme-cosmo/cosmo.min.css"> -->
     <link rel="stylesheet" href="style.css">
+
   </head>
 
   <body>
     <canvas id="paintarea">bar</canvas>
-    <div id="info">Welcome to Sarynpaint</div>
-  </body>
 
+    <div id="splash" class="modal show" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" id="close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h1 class="text-center">Welcome to SarynPaint</h1>
+          </div>
+          <div class="modal-body">
+            <p>SarynPaint is a simple paint program written for my friend Saryn when she was about two years old.  This program was created so that she could paint with her limited mousing skills.  Later she kindly recorded the audio cues for the program.</p>
+            <p>This program runs best in full screen mode.</p>
+          </div>
+
+          <div class="modal-footer">
+            <div class="col-md-12">
+              <button id="start" class="btn" data-dismiss="modal" aria-hidden="true">Start</button>
+              <button id="fullscreen" class="btn" data-dismiss="modal" aria-hidden="true">Start Full Screen</button>
+            </div>
+		      </div>
+        </div>
+      </div>
   <script data-main="main.js" src="bower_components/requirejs/require.js"></script>
 </html>
