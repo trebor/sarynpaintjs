@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <widget xmlns = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+	      xmlns:android = "http://schemas.android.com/apk/res/android"
+        id = "org.trebor.sarynpaint"
+        version = "1.0.3">
 
-    xmlns:gap = "http://phonegap.com/ns/1.0"
-	xmlns:android = "http://schemas.android.com/apk/res/android"
-    id        = "com.fortuitouspress.flashback"
-    version   = "1.0.3">
-<name>Saryn Paint</name>
+ <name>Saryn Paint</name>
 
 <description>A paint program for toddlers.</description>
 
 <author email="trebor@trebor.org">Robert Harris</author>
 <author email="jeremy@fortuitouspress.com">Jeremy Bagai</author>
-
 
 <!-- Icons -->
 <icon src="resources/graphics/SarynPaintIcon.png" width="57" height="57"/>
@@ -34,26 +33,26 @@
 
 
 <!-- Splash Screens -->
-<gap:splash src="images/Default-568h@2x.png" gap:platform="ios" width="640" height="1136" />
-<gap:splash src="images/Default-Portrait_at_2x.png"  gap:platform="ios" width="1536" height="2048" />
+<!-- <gap:splash src="images/Default-568h@2x.png" gap:platform="ios" width="640" height="1136" /> -->
+<!-- <gap:splash src="images/Default-Portrait_at_2x.png"  gap:platform="ios" width="1536" height="2048" /> -->
 
-<gap:splash src="images/322Splash.9.png" gap:platform="android" gap:density="mdpi" />
-<gap:splash src="images/482Splash.9.png" gap:platform="android" gap:density="hdpi" />
-<gap:splash src="images/482Splash.9.png" gap:platform="android" gap:density="large-mdpi" />
-<gap:splash src="images/642Splash.9.png" gap:platform="android" gap:density="xhdpi" />
-<gap:splash src="images/962Splash.9.png" gap:platform="android" gap:density="xxhdpi" />
-<gap:splash src="images/242Splash.9.png" gap:platform="android" gap:density="ldpi" />
+<!-- <gap:splash src="images/322Splash.9.png" gap:platform="android" gap:density="mdpi" /> -->
+<!-- <gap:splash src="images/482Splash.9.png" gap:platform="android" gap:density="hdpi" /> -->
+<!-- <gap:splash src="images/482Splash.9.png" gap:platform="android" gap:density="large-mdpi" /> -->
+<!-- <gap:splash src="images/642Splash.9.png" gap:platform="android" gap:density="xhdpi" /> -->
+<!-- <gap:splash src="images/962Splash.9.png" gap:platform="android" gap:density="xxhdpi" /> -->
+<!-- <gap:splash src="images/242Splash.9.png" gap:platform="android" gap:density="ldpi" /> -->
 
 <!-- <gap:plugin name="de.4brains.cordova.purchase" source="plugins.cordova.io"> -->
 <!--     <param name="BILLING_KEY" value="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjwYZLwk6LMCJyEO6hxYAK6avTbseerMntvgb4aAmMicRbyozbnWFlaUAtDn3JoAkgEJgqzd+ONGDlTfXLwnRGj6wo4W440UGROivjpnpQhkhJhHBGgN23wE8Aa+BVnCBdABrVwUg/IJ3QLqk9RAiGroBMfsA+w0Qui2mL352opl3H4e20WY4W60Ixyw0TiQMwLc5hYSttR/Xl62MSTl8qUZJbaVByMq1KAmckXWDN+xZWB0lW0WGdv9+pw7GrsVUlPC6wHaq+8Clq2xIwP+0ynF5S6Y294BI/SdjQuhWyUk8WroRwNh+Iq58xnTbp+w/oavsVihts5Cursj5OwstZQIDAQAB" /> -->
 <!-- </gap:plugin> -->
 
-<gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
-<gap:plugin name="org.apache.cordova.splashscreen" />
-<feature name="SplashScreen">
-    <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
-    <param name="ios-package" value="CDVSplashScreen" />
-</feature>
+<!-- <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" /> -->
+<!-- <gap:plugin name="org.apache.cordova.splashscreen" /> -->
+<!-- <feature name="SplashScreen"> -->
+<!--     <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" /> -->
+<!--     <param name="ios-package" value="CDVSplashScreen" /> -->
+<!-- </feature> -->
 
 <feature name="http://api.phonegap.com/1.0/device" />
 
