@@ -44,10 +44,9 @@
 <gap:splash src="images/962Splash.9.png" gap:platform="android" gap:density="xxhdpi" />
 <gap:splash src="images/242Splash.9.png" gap:platform="android" gap:density="ldpi" />
 
-<gap:plugin name="de.4brains.cordova.purchase" source="plugins.cordova.io">
-    <param name="BILLING_KEY" value="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjwYZLwk6LMCJyEO6hxYAK6avTbseerMntvgb4aAmMicRbyozbnWFlaUAtDn3JoAkgEJgqzd+ONGDlTfXLwnRGj6wo4W440UGROivjpnpQhkhJhHBGgN23wE8Aa+BVnCBdABrVwUg/IJ3QLqk9RAiGroBMfsA+w0Qui2mL352opl3H4e20WY4W60Ixyw0TiQMwLc5hYSttR/Xl62MSTl8qUZJbaVByMq1KAmckXWDN+xZWB0lW0WGdv9+pw7GrsVUlPC6wHaq+8Clq2xIwP+0ynF5S6Y294BI/SdjQuhWyUk8WroRwNh+Iq58xnTbp+w/oavsVihts5Cursj5OwstZQIDAQAB" />
-</gap:plugin>
-
+<!-- <gap:plugin name="de.4brains.cordova.purchase" source="plugins.cordova.io"> -->
+<!--     <param name="BILLING_KEY" value="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjwYZLwk6LMCJyEO6hxYAK6avTbseerMntvgb4aAmMicRbyozbnWFlaUAtDn3JoAkgEJgqzd+ONGDlTfXLwnRGj6wo4W440UGROivjpnpQhkhJhHBGgN23wE8Aa+BVnCBdABrVwUg/IJ3QLqk9RAiGroBMfsA+w0Qui2mL352opl3H4e20WY4W60Ixyw0TiQMwLc5hYSttR/Xl62MSTl8qUZJbaVByMq1KAmckXWDN+xZWB0lW0WGdv9+pw7GrsVUlPC6wHaq+8Clq2xIwP+0ynF5S6Y294BI/SdjQuhWyUk8WroRwNh+Iq58xnTbp+w/oavsVihts5Cursj5OwstZQIDAQAB" /> -->
+<!-- </gap:plugin> -->
 
 <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
 <gap:plugin name="org.apache.cordova.splashscreen" />
