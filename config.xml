@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns = "http://www.w3.org/ns/widgets"
+	
+    xmlns:gap = "http://phonegap.com/ns/1.0"
+	xmlns:android = "http://schemas.android.com/apk/res/android"
+    id        = "com.fortuitouspress.flashback"
+    version   = "1.0.3">
+	
+<name>FlashBack</name>
+
+<description>Backgammon Flash Cards from The Fortuitous Press</description>
+
+<author email="jeremy@fortuitouspress.com">Jeremy Bagai</author>
+
+
+<!-- Icons -->
+<icon src="icon.png" />
+<icon src="icon.png" gap:platform="ios" width="57" height="57"/>
+<icon src="images/icon-60.png" gap:platform="ios" width="60" height="60" />
+<icon src="images/icon-60@2x.png" gap:platform="ios" width="120" height="120" />
+<icon src="images/icon-72.png" gap:platform="ios" width="72" height="72" />
+<icon src="images/icon-76.png" gap:platform="ios" width="76" height="76" />
+<icon src="images/icon-1024.png" gap:platform="ios" width="1024" height="1024" />
+<icon src="images/icon-76@2x.png" gap:platform="ios" width="152" height="152" />
+<icon src="images/icon-small.png" gap:platform="ios" width="29" height="29" />
+<icon src="images/icon-small@2x.png" gap:platform="ios" width="58" height="58" />
+<icon src="images/icon-40.png" gap:platform="ios" width="40" height="40" />
+<icon src="images/icon-40@2x.png" gap:platform="ios" width="80" height="80" />
+
+<icon src="images/mdpi.png" gap:platform="android" gap:qualifier="mdpi" />
+<icon src="images/hdpi.png" gap:platform="android" gap:qualifier="hdpi" />
+<icon src="images/xhdpi.png" gap:platform="android" gap:qualifier="xhdpi" />
+<icon src="images/xxhdpi.png" gap:platform="android" gap:qualifier="xxhdpi" />
+<icon src="images/fr-xxhdpi.png" gap:platform="android" gap:qualifier="fr-xxhdpi" />
+
+
+<!-- Splash Screens -->
+<gap:splash src="images/Default-568h@2x.png" gap:platform="ios" width="640" height="1136" />
+<gap:splash src="images/Default-Portrait_at_2x.png"  gap:platform="ios" width="1536" height="2048" />
+
+<gap:splash src="images/322Splash.9.png" gap:platform="android" gap:density="mdpi" />
+<gap:splash src="images/482Splash.9.png" gap:platform="android" gap:density="hdpi" /> 
+<gap:splash src="images/482Splash.9.png" gap:platform="android" gap:density="large-mdpi" /> 
+<gap:splash src="images/642Splash.9.png" gap:platform="android" gap:density="xhdpi" /> 
+<gap:splash src="images/962Splash.9.png" gap:platform="android" gap:density="xxhdpi" /> 
+<gap:splash src="images/242Splash.9.png" gap:platform="android" gap:density="ldpi" /> 
+
+<gap:plugin name="de.4brains.cordova.purchase" source="plugins.cordova.io">
+    <param name="BILLING_KEY" value="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjwYZLwk6LMCJyEO6hxYAK6avTbseerMntvgb4aAmMicRbyozbnWFlaUAtDn3JoAkgEJgqzd+ONGDlTfXLwnRGj6wo4W440UGROivjpnpQhkhJhHBGgN23wE8Aa+BVnCBdABrVwUg/IJ3QLqk9RAiGroBMfsA+w0Qui2mL352opl3H4e20WY4W60Ixyw0TiQMwLc5hYSttR/Xl62MSTl8qUZJbaVByMq1KAmckXWDN+xZWB0lW0WGdv9+pw7GrsVUlPC6wHaq+8Clq2xIwP+0ynF5S6Y294BI/SdjQuhWyUk8WroRwNh+Iq58xnTbp+w/oavsVihts5Cursj5OwstZQIDAQAB" />
+</gap:plugin>
+
+
+<gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
+<gap:plugin name="org.apache.cordova.splashscreen" />
+<feature name="SplashScreen">
+    <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
+    <param name="ios-package" value="CDVSplashScreen" />
+</feature>
+
+<feature name="http://api.phonegap.com/1.0/device" />
+
+
+<gap:config-file platform="ios" parent="UIStatusBarHidden">
+    <true/>
+</gap:config-file>
+
+<gap:config-file platform="ios" parent="UIViewControllerBasedStatusBarAppearance">
+    <false/>
+</gap:config-file>
+
+<!-- <gap:config-file platform="android" parent="/manifest">
+     <application android:debuggable="false" />
+</gap:config-file> -->
+
+<gap:config-file platform="android" parent="/manifest">
+     <application android:debuggable="false" />
+</gap:config-file>
+
+
+
+
+
+<access origin="*" browserOnly="true"/>
+<gap:plugin name="org.apache.cordova.inappbrowser" />
+<!--gap:plugin name="org.apache.cordova.geolocation" />-->
+
+<preference name="phonegap-version" value="cli-5.2.0" />
+<!-- <preference name="phonegap-version" value="3.7.0" /> -->
+<preference name="orientation" value="portrait" />
+<preference name="fullscreen" value="true" />
+<preference name="deployment-target" value="8.0" />
+<preference name="permissions" value="none"/>
+<preference name="SplashScreenDelay" value="90000" />
+<preference name="StatusBarOverlaysWebView" value="false" />
+<preference name="AutoHideSplashScreen" value="false" />
+<application android:hardwareAccelerated="false" />
+
+</widget>
