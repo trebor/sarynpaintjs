@@ -5,11 +5,11 @@
 	xmlns:android = "http://schemas.android.com/apk/res/android"
     id        = "com.fortuitouspress.flashback"
     version   = "1.0.3">
-	
-<name>FlashBack</name>
+<name>Saryn Paint</name>
 
-<description>Backgammon Flash Cards from The Fortuitous Press</description>
+<description>A paint program for toddlers.</description>
 
+<author email="trebor@trebor.org">Robert Harris</author>
 <author email="jeremy@fortuitouspress.com">Jeremy Bagai</author>
 
 
@@ -39,11 +39,11 @@
 <gap:splash src="images/Default-Portrait_at_2x.png"  gap:platform="ios" width="1536" height="2048" />
 
 <gap:splash src="images/322Splash.9.png" gap:platform="android" gap:density="mdpi" />
-<gap:splash src="images/482Splash.9.png" gap:platform="android" gap:density="hdpi" /> 
-<gap:splash src="images/482Splash.9.png" gap:platform="android" gap:density="large-mdpi" /> 
-<gap:splash src="images/642Splash.9.png" gap:platform="android" gap:density="xhdpi" /> 
-<gap:splash src="images/962Splash.9.png" gap:platform="android" gap:density="xxhdpi" /> 
-<gap:splash src="images/242Splash.9.png" gap:platform="android" gap:density="ldpi" /> 
+<gap:splash src="images/482Splash.9.png" gap:platform="android" gap:density="hdpi" />
+<gap:splash src="images/482Splash.9.png" gap:platform="android" gap:density="large-mdpi" />
+<gap:splash src="images/642Splash.9.png" gap:platform="android" gap:density="xhdpi" />
+<gap:splash src="images/962Splash.9.png" gap:platform="android" gap:density="xxhdpi" />
+<gap:splash src="images/242Splash.9.png" gap:platform="android" gap:density="ldpi" />
 
 <gap:plugin name="de.4brains.cordova.purchase" source="plugins.cordova.io">
     <param name="BILLING_KEY" value="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjwYZLwk6LMCJyEO6hxYAK6avTbseerMntvgb4aAmMicRbyozbnWFlaUAtDn3JoAkgEJgqzd+ONGDlTfXLwnRGj6wo4W440UGROivjpnpQhkhJhHBGgN23wE8Aa+BVnCBdABrVwUg/IJ3QLqk9RAiGroBMfsA+w0Qui2mL352opl3H4e20WY4W60Ixyw0TiQMwLc5hYSttR/Xl62MSTl8qUZJbaVByMq1KAmckXWDN+xZWB0lW0WGdv9+pw7GrsVUlPC6wHaq+8Clq2xIwP+0ynF5S6Y294BI/SdjQuhWyUk8WroRwNh+Iq58xnTbp+w/oavsVihts5Cursj5OwstZQIDAQAB" />
@@ -61,11 +61,11 @@
 
 
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
-    <true/>
+    <true />
 </gap:config-file>
 
 <gap:config-file platform="ios" parent="UIViewControllerBasedStatusBarAppearance">
-    <false/>
+    <false />
 </gap:config-file>
 
 <!-- <gap:config-file platform="android" parent="/manifest">
@@ -76,11 +76,7 @@
      <application android:debuggable="false" />
 </gap:config-file>
 
-
-
-
-
-<access origin="*" browserOnly="true"/>
+<access origin="*" browserOnly="true" />
 <gap:plugin name="org.apache.cordova.inappbrowser" />
 <!--gap:plugin name="org.apache.cordova.geolocation" />-->
 
@@ -89,7 +85,7 @@
 <preference name="orientation" value="portrait" />
 <preference name="fullscreen" value="true" />
 <preference name="deployment-target" value="8.0" />
-<preference name="permissions" value="none"/>
+<preference name="permissions" value="none" />
 <preference name="SplashScreenDelay" value="90000" />
 <preference name="StatusBarOverlaysWebView" value="false" />
 <preference name="AutoHideSplashScreen" value="false" />
